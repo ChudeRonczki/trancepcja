@@ -1,12 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Target : MonoBehaviour
 {
+    public int ownerId = 0;
     public int pointsCollected = 0;
-    public Text pointsLabel; 
+
+    public event Action StateChanged;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -15,7 +18,8 @@ public class Target : MonoBehaviour
         {
             pointsCollected += bat.carriedPoints;
             bat.carriedPoints = 0;
-            pointsLabel.text = pointsCollected.ToString();
+            if (StateChanged != null)
+                StateChanged();
         }
     }
 

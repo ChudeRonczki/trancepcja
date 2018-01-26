@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BatState : MonoBehaviour
 {
+    public int ownerId = 0;
     public int carriedPoints = 0;
 
     private void OnTriggerEnter(Collider other)
