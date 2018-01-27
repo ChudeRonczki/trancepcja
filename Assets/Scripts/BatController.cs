@@ -154,11 +154,10 @@ public class BatController : MonoBehaviour
         Rigidbody.AddForce(moveVector, ForceMode.Impulse);
 
         RaycastHit hit;
-        if (Physics.Raycast(new Ray(transform.position, Vector3.down), out hit, 0.4f, LayerMask))
+        if (Physics.Raycast(new Ray(transform.position, direction * transform.right), out hit, 0.4f, LayerMask))
         {
             Rigidbody.AddTorque(direction * transform.forward * TurnForce * 3f, ForceMode.Impulse);
             Rigidbody.AddForce(Vector3.up * PushForceSingleWing, ForceMode.Impulse);
-            Debug.Log("BaM");
         }
     }
 }
