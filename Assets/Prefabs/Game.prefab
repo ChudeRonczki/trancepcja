@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4988781578839314}
   - component: {fileID: 114709874625398086}
+  - component: {fileID: 114019056806152926}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -40,6 +41,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114019056806152926
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1498795152281206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47d483557dcdb864cbbab60e65d8f960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnInterval: 4
+  probabilites:
+  - 1
+  - 0.3
+  - 0.1
+  prefabs:
+  - {fileID: 114867193758496984, guid: 09be2b528f1ff2646a1f72aef10a283d, type: 2}
+  - {fileID: 114472677680639388, guid: 46f08dbbc0f2eaf4798bd987c39d12ed, type: 2}
+  - {fileID: 114560830274963232, guid: aa91e3e5705b7ba4c8022f7d86d7f10a, type: 2}
 --- !u!114 &114709874625398086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -53,3 +74,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointsCollected: 0000000000000000
   pointsTarget: 10
+  lastDropAward: 2

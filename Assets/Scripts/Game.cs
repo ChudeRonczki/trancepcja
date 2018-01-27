@@ -9,6 +9,7 @@ public class Game : MonoBehaviour
     public static Game Instance;
 
     public const int WallsLayer = 9;
+    public const int CollectiblesLayer = 11;
 
     public int[] pointsCollected = { 0, 0 };
     public int pointsTarget = 10;
