@@ -21,7 +21,7 @@ Shader "Custom/RefractStandard" {
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
-		#pragma surface surf Standard fullforwardshadows vertex:vert
+		#pragma surface surf Standard vertex:vert
 
 		// Use shader model 3.0 target, to get nicer looking lighting
 		#pragma target 3.0
@@ -61,17 +61,27 @@ Shader "Custom/RefractStandard" {
 			float3 worldNormal = WorldNormalVector(IN, o.Normal);
 			float3 viewNormal = normalize(mul((float3x3)UNITY_MATRIX_V, worldNormal));
 
-			//float3 viewDir = normalize(mul(UNITY_MATRIX_V, IN.worldPos));
+			//float3 viewDir = normalize(mul((float3x3)UNITY_MATRIX_V, IN.worldPos));
 			//float3 viewCross = cross(viewDir, viewNormal);
 			//viewNormal = float3(-viewCross.y, viewCross.x, 0);
+			
+			half rimValue = 0;
 
-			IN.screenPos.xy -= viewNormal.xy * _Refraction;
+			if (UNITY_MATRIX_P[3][3] > 0)
+			{
+				rimValue = viewNormal.z;
+				IN.screenPos.xy -= viewNormal.xy * _Refraction * 0.05;
+			}
+			else
+			{
+				half3 viewDirection = normalize(_WorldSpaceCameraPos - IN.worldPos);
+				rimValue = dot(viewDirection, worldNormal);
+				IN.screenPos.xy -= viewNormal.xy * _Refraction;
+			}
 
-			half3 viewDirection = normalize(_WorldSpaceCameraPos - IN.worldPos);
-			half rimValue = dot(viewDirection, worldNormal);
 			half transparency = saturate(1 - _Transparency + 1 - rimValue);
 			o.Albedo = _Color.rgb * transparency;
-            o.Emission = tex2Dproj(  _GrabTexture, IN.screenPos).rgb * (1 - transparency) * _RefractionColor;
+            o.Emission = tex2Dproj(  _GrabTexture, UNITY_PROJ_COORD(IN.screenPos)).rgb * (1 - transparency) * _RefractionColor;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
@@ -79,5 +89,4 @@ Shader "Custom/RefractStandard" {
 		}
 		ENDCG
 	}
-	FallBack "Diffuse"
 }
