@@ -11,6 +11,7 @@ public class BatState : MonoBehaviour
     public float dropSpreadImpulse = .5f;
     public Transform tranContainer;
     public float containerScalePerPoint = .1f;
+    public float containerStartScale = 1f;
 
     public int CarriedPoints
     {
@@ -32,8 +33,15 @@ public class BatState : MonoBehaviour
 
     public void RefreshContainer()
     {
-        tranContainer.localScale = new Vector3(CarriedPoints * containerScalePerPoint,
-            CarriedPoints * containerScalePerPoint, CarriedPoints * containerScalePerPoint);
+        if (CarriedPoints > 0f)
+        {
+            float scale = containerStartScale + CarriedPoints * containerScalePerPoint;
+            tranContainer.localScale = new Vector3(scale, scale, scale);
+        }
+        else
+        {
+            tranContainer.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
