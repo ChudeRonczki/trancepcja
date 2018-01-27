@@ -119,7 +119,7 @@ public class BatController : MonoBehaviour
         }
     }
 
-    private void ResetInput()
+    internal void ResetInput()
     {
         RightChanged = false;
         LeftChanged = false;
