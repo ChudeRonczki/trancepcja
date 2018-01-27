@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Tran
+  m_Name: TranTube
   m_Shader: {fileID: 4800000, guid: a123b3830f1da93468976eb3217eebd3, type: 3}
   m_ShaderKeywords: WAVE
   m_LightmapFlags: 4
@@ -60,7 +60,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 0.66
+    - _Glossiness: 0.8
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
@@ -73,11 +73,11 @@ Material:
     - _Transparency: 1
     - _UVSec: 0
     - _Wave: 1
-    - _WaveScale: 20
+    - _WaveScale: 5
     - _WaveSpeed: 1
-    - _WaveStrength: 0.015
+    - _WaveStrength: 0.1
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 0, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _RefractionColor: {r: 1, g: 0, b: 0, a: 1}
+    - _RefractionColor: {r: 1, g: 0.31754875, b: 0, a: 1}
