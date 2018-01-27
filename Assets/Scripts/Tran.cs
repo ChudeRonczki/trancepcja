@@ -45,10 +45,16 @@ public class Tran : MonoBehaviour
     internal void Drop(Vector3 force)
     {
         gameObject.SetActive(true);
+        RaycastHit hitInfo;
+        if (Physics.Raycast(body.position, Vector3.down, out hitInfo, sphereCollider.radius, 1 << Game.WallsLayer))
+        {
+            if (Vector3.Dot(Vector3.up, hitInfo.normal) > .1f)
+            {
+                body.useGravity = false;
+                return;
+            }
+        }
 
-        if (Physics.CheckSphere(body.position, sphereCollider.radius, 1 << Game.WallsLayer))
-            body.useGravity = false;
-        else
-            body.AddForce(force, ForceMode.Impulse);
+        body.AddForce(force, ForceMode.Impulse);
     }
 }
