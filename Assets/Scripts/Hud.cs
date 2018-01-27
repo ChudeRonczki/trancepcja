@@ -9,13 +9,22 @@ public class Hud : MonoBehaviour
 {
     public Text progressLabel;
     public GameObject finishRoot;
-    public Text winnerLabel;
-    public Text[] playerTotalLabels;
+    public GameObject[] finishPages;
+    int currentFinishPage = 0;
+
+    public bool LastPageShown
+    {
+        get
+        {
+            return currentFinishPage >= finishPages.Length - 1;
+        }
+    }
 
     private void Start()
     {
         Refresh();
         Game.Instance.StateChanged += Refresh;
+        finishRoot.SetActive(false);
     }
 
     private void Refresh()
@@ -23,24 +32,22 @@ public class Hud : MonoBehaviour
         progressLabel.text = String.Format("{0}/{1}", Game.Instance.TotalPointsCollected,
             Game.Instance.pointsTarget);
 
-        if (Game.Instance.Finished)
+        if (Game.Instance.Finished && !finishRoot.activeSelf)
         {
             finishRoot.SetActive(true);
-
-            if (Game.Instance.Winner == 0)
-                winnerLabel.text = "Player 1 Wins";
-            else if (Game.Instance.Winner == 1)
-                winnerLabel.text = "Player 2 Wins";
-            else
-                winnerLabel.text = "Even Game";
-
-            for (int i = 0; i < playerTotalLabels.Length; ++i)
-            {
-                playerTotalLabels[i].text = String.Format("Player {0}: {1}", i + 1,
-                    Match.Instance.gamesWon[i]);
-            }
+            RefreshFinish();
         }
-        else
-            finishRoot.SetActive(false);
+    }
+
+    private void RefreshFinish()
+    {
+        for (int i = 0; i < finishPages.Length; ++i)
+            finishPages[i].SetActive(i == currentFinishPage);
+    }
+
+    internal void Proceed()
+    {
+        ++currentFinishPage;
+        RefreshFinish();
     }
 }

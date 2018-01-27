@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -18,7 +19,12 @@ public class Game : MonoBehaviour
 
     public int[] pointsCollected = { 0, 0 };
 
+    public GameObject countdownRoot;
+    public Text countdownLabel;
+
     public event Action StateChanged;
+
+    Hud hud;
 
     public int TotalPointsCollected
     {
@@ -57,6 +63,30 @@ public class Game : MonoBehaviour
         Instance = this;
         if (Match.Instance == null)
             Instantiate(matchPrefab);
+
+        hud = FindObjectOfType<Hud>();
+    }
+
+    private void Start()
+    {
+        StartCoroutine(Countdown());
+    }
+
+    private IEnumerator Countdown()
+    {
+        Time.timeScale = 0f;
+        countdownRoot.SetActive(true);
+        for (int i = 3; i > 0; --i)
+        {
+            countdownLabel.text = i.ToString();
+            for (float time = 1f; time > 0f; time -= Time.unscaledDeltaTime)
+            {
+                countdownLabel.rectTransform.localScale = new Vector3(time, time);
+                yield return null;
+            }
+        }
+        Time.timeScale = 1f;
+        countdownRoot.SetActive(false);
     }
 
     internal void GivePoints(Tran tran)
@@ -70,6 +100,9 @@ public class Game : MonoBehaviour
             pointsCollected[tran.lastOwner] += lastDropAward;
             if (Winner != -1)
                 ++Match.Instance.gamesWon[Winner];
+
+            Time.timeScale = 0f;
+            Match.Instance.HandleGameFinished();
         }
 
         Destroy(tran.gameObject);
@@ -81,6 +114,16 @@ public class Game : MonoBehaviour
     private void Update()
     {
         if (Finished && Input.GetButtonDown("Proceed"))
-            Match.Instance.Proceed();
+        {
+            if (hud.LastPageShown)
+                Match.Instance.Proceed();
+            else
+                hud.Proceed();
+        }
+        else if (Finished && hud.LastPageShown
+            && Match.Instance.Finished && Input.GetButtonDown("Fire1"))
+        {
+            Match.Instance.Restart(matchPrefab);
+        }
     }
 }
