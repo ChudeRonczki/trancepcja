@@ -29,7 +29,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 64
   m_IsActive: 1
 --- !u!4 &4924003135454546
 Transform:
@@ -37,8 +37,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1830981644411022}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.491, y: 1.27, z: 1.16}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 4.4, z: 1.16}
   m_LocalScale: {x: 2.8982716, y: 1.59693, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -108,6 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b975fcf65f1e974fafb63eecef350c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TranSplooshParticles: {fileID: 198950824169221926, guid: a1f75b4a6893a154bbcbdc7bc997355d,
+    type: 2}
 --- !u!114 &114721192316104228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,3 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTran: 0
+  particlesOnDeath: {fileID: 198950824169221926, guid: 184c08564066877438179d80093c4fad,
+    type: 2}
+  ParticlesOffset: {x: 0, y: -1, z: 0}

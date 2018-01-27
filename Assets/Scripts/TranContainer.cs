@@ -25,14 +25,21 @@ public class TranContainer : MonoBehaviour {
     private void OnGameStateChanged()
     {
         targetScaleY = Mathf.Min(StartScale + Game.Instance.TotalPointsCollected * ScaleStep, 1f);
-        StateChangeParticles.Play();
+        //StateChangeParticles.Play();
     }
 
     private void Update()
     {
         if (currentScale.y < targetScaleY)
         {
+            float prevScaleY = currentScale.y;
+
             currentScale.y = Mathf.Lerp(currentScale.y, targetScaleY, 0.04f);
+
+            if (prevScaleY % 0.25f > currentScale.y % 0.25f)
+            {
+                if (StateChangeParticles) StateChangeParticles.Play();
+            }
 
             if (targetScaleY - currentScale.y < 0.01f)
             {
