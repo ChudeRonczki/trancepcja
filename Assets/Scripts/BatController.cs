@@ -29,19 +29,12 @@ public class BatController : MonoBehaviour
 
     bool LeftPressed = false;
     bool RightPressed = false;
-    bool BothPressed = false;
 
     bool LeftChanged = false;
     bool RightChanged = false;
-
-    FlapAction LastAction = FlapAction.None;
-    float LastFlapTime = 0f;
-
+    
     Rigidbody Rigidbody;
-
-    int MaxFramesBetweenInputs = 2;
-    int FramesBetweenInputs = 0;
-
+    
     float Timer = 0f;
     public float InputLag = 0.05f;
 
@@ -154,11 +147,6 @@ public class BatController : MonoBehaviour
             AnimationController.SetTrigger("FlapL");
             AnimationController.SetTrigger("FlapR");
             AnimationController.SetTrigger("Bob");
-        }
-
-        if (action != FlapAction.None)
-        {
-            LastFlapTime = Time.time;
         }
     }
 
