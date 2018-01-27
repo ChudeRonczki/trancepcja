@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerHud : MonoBehaviour
 {
     public Target target;
+    public int ownerId;
     public Text pointsLabel;
 
     private void Start()
@@ -15,6 +16,6 @@ public class PlayerHud : MonoBehaviour
 
     private void Refresh()
     {
-        pointsLabel.text = target.pointsCollected.ToString();
+        pointsLabel.text = target.pointsCollected[ownerId].ToString();
     }
 }
