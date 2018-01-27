@@ -70,7 +70,7 @@ Shader "Custom/RefractStandard" {
 			half3 viewDirection = normalize(_WorldSpaceCameraPos - IN.worldPos);
 			half rimValue = dot(viewDirection, worldNormal);
 			half transparency = saturate(1 - _Transparency + 1 - rimValue);
-			o.Albedo = _Color.rgb * saturate(1 - _Transparency + 1 - rimValue);
+			o.Albedo = _Color.rgb * transparency;
             o.Emission = tex2Dproj(  _GrabTexture, IN.screenPos).rgb * (1 - transparency) * _RefractionColor;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;

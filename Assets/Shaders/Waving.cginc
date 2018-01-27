@@ -22,7 +22,7 @@ inline float3 WaveVertex(float3 worldPos, fixed mask)
 
 inline bool ShouldWave(fixed mask)
 {
-	return mask > 0.01 && _WaveStrength > 0.01;
+	return mask > 0.01;
 }
 
 inline float3 WaveVertex2D(float3 worldPos, fixed mask, out float3 normal)
@@ -59,5 +59,5 @@ inline float3 WaveVertex2D(float3 worldPos, fixed mask, out float3 normal)
 	normal.xz = -normalTemp * 0.5 * _WaveStrength * mask * _WaveScale;
 	normal.y = sqrt(1.0 - saturate(dot(normal.xz, normal.xz)));
 
-	return float3(0, (pos.x + pos.y + 1.5) * 0.5 * _WaveStrength * mask, 0);
+	return float3(0, (pos.x + pos.y + 2) * 0.5 * _WaveStrength * mask, 0);
 }

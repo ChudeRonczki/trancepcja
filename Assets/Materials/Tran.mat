@@ -60,22 +60,22 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
-    - _Glossiness: 1
+    - _Glossiness: 0.66
     - _GlossyReflections: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Refraction: 0.1
+    - _Refraction: 0.01
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _Transparency: 1
     - _UVSec: 0
     - _Wave: 1
-    - _WaveScale: 2
+    - _WaveScale: 20
     - _WaveSpeed: 1
-    - _WaveStrength: 0.1
+    - _WaveStrength: 0.015
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 0, a: 1}
