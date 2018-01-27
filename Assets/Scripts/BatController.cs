@@ -19,13 +19,13 @@ public class BatController : MonoBehaviour
     public string PlayerNumber = "1";
 
     [SerializeField]
-    public float TurnForce = 0.1f;
+    public float TurnForce = 0.5f;
     [SerializeField]
-    public float MoveForceSingleWing = 1.0f;
+    public float MoveForceSingleWing = 10.0f;
     [SerializeField]
-    public float PushForceSingleWing = 1.0f;
+    public float PushForceSingleWing = 13.0f;
     [SerializeField]
-    public float MoveForceBothWings = 5.0f;
+    public float MoveForceBothWings = 15.0f;
 
     bool LeftPressed = false;
     bool RightPressed = false;
@@ -44,6 +44,9 @@ public class BatController : MonoBehaviour
 
     float Timer = 0f;
     public float InputLag = 0.05f;
+
+    [SerializeField]
+    LayerMask LayerMask;
 
     private void Start()
     {
@@ -69,10 +72,9 @@ public class BatController : MonoBehaviour
             StartTimer();
         }
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Drop" + PlayerNumber))
         {
-            Rigidbody.AddTorque(transform.forward * 10f, ForceMode.Impulse);
-            Rigidbody.AddForce(Vector3.up * 100f, ForceMode.Impulse);
+            Rigidbody.AddTorque(transform.forward * 50f, ForceMode.Impulse);
         }
     }
 
@@ -127,28 +129,36 @@ public class BatController : MonoBehaviour
     {
         if (action == FlapAction.FlapLeft)
         {
-            Rigidbody.AddTorque(transform.forward * TurnForce, ForceMode.Impulse);
-            var moveVector = Vector3.up * PushForceSingleWing + transform.forward * MoveForceSingleWing;
-            Rigidbody.AddForce(moveVector, ForceMode.Impulse);
-            Debug.Log("Left");
+            Flip(1f);
         }
         else if (action == FlapAction.FlapRight)
         {
-            Rigidbody.AddTorque(-transform.forward * TurnForce, ForceMode.Impulse);
-            var moveVector = Vector3.up * PushForceSingleWing + transform.forward * MoveForceSingleWing;
-            Rigidbody.AddForce(moveVector, ForceMode.Impulse);
-            Debug.Log("Right");
+            Flip(-1f);
         }
         else if (action == FlapAction.FlapBoth)
         {
-            Debug.Log("Both");
-            var moveVector = Vector3.up * PushForceSingleWing + transform.up * MoveForceBothWings;
+            var moveVector = Vector3.up * PushForceSingleWing * 0.5f + transform.up * MoveForceBothWings;
             Rigidbody.AddForce(moveVector, ForceMode.Impulse);
         }
 
         if (action != FlapAction.None)
         {
             LastFlapTime = Time.time;
+        }
+    }
+
+    private void Flip(float direction)
+    {
+        Rigidbody.AddTorque(direction * transform.forward * TurnForce, ForceMode.Impulse);
+        var moveVector = Vector3.up * PushForceSingleWing + transform.forward * PushForceSingleWing;
+        Rigidbody.AddForce(moveVector, ForceMode.Impulse);
+
+        RaycastHit hit;
+        if (Physics.Raycast(new Ray(transform.position, Vector3.down), out hit, 0.4f, LayerMask))
+        {
+            Rigidbody.AddTorque(direction * transform.forward * TurnForce * 3f, ForceMode.Impulse);
+            Rigidbody.AddForce(Vector3.up * PushForceSingleWing, ForceMode.Impulse);
+            Debug.Log("BaM");
         }
     }
 }
