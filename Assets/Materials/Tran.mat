@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Tran
-  m_Shader: {fileID: 4800000, guid: a123b3830f1da93468976eb3217eebd3, type: 3}
+  m_Shader: {fileID: 4800000, guid: 486318f769ac00a48bff451107fd6ab0, type: 3}
   m_ShaderKeywords: WAVE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -59,6 +59,7 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
+    - _Emissiontrength: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.8
     - _GlossyReflections: 1
@@ -79,5 +80,5 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 0, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissionColor: {r: 1, g: 0, b: 0, a: 1}
     - _RefractionColor: {r: 1, g: 0.31754875, b: 0, a: 1}

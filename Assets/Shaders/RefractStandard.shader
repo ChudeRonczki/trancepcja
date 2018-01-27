@@ -8,6 +8,7 @@ Shader "Custom/RefractStandard" {
 		_Transparency ("Transparency", Range(0,1)) = 1
 		_Refraction ("Refraction", Range(0,1)) = 0.1
 		_RefractionColor ("Refraction Color", Color) = (1,1,1,1)
+		_EmissionColor ("Emission Color", Color) = (0,0,0,1)
 		[Toggle(WAVE)] _Wave("Wave mesh", Float) = 0
 		_WaveStrength("Waving Strength", Float) = 1.0
 		_WaveSpeed("Waving Speed", Float) = 1.0
@@ -51,6 +52,7 @@ Shader "Custom/RefractStandard" {
 		half _Transparency;
 		half _Refraction;
 		fixed4 _Color;
+		fixed4 _EmissionColor;
 		fixed4 _RefractionColor;
         sampler2D _GrabTex;
 		float4 _GrabTex_TexelSize;
@@ -81,7 +83,7 @@ Shader "Custom/RefractStandard" {
 
 			half transparency = saturate(1 - _Transparency + 1 - rimValue);
 			o.Albedo = _Color.rgb * transparency;
-            o.Emission = tex2Dproj(  _GrabTex, UNITY_PROJ_COORD(IN.screenPos)).rgb * (1 - transparency) * _RefractionColor;
+            o.Emission = tex2Dproj(  _GrabTex, UNITY_PROJ_COORD(IN.screenPos)).rgb * (1 - transparency) * _RefractionColor + _EmissionColor;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;
