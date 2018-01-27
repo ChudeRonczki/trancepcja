@@ -1207,16 +1207,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bef88d4f5937a941a9253230017f053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerDeadzone: 0.5
+  ControllerDeadzone: 0.2
   PlayerNumber: 1
   TurnForce: 0.5
   MoveForceSingleWing: 10
-  PushForceSingleWing: 13
+  PushForceSingleWing: 10
   MoveForceBothWings: 15
   InputLag: 0.05
   LayerMask:
     serializedVersion: 2
     m_Bits: 512
+  MassPerCarriedPoint: 0.1
 --- !u!114 &114936516674619770
 MonoBehaviour:
   m_ObjectHideFlags: 1
