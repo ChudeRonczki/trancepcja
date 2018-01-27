@@ -49,13 +49,18 @@ public class BatController : MonoBehaviour
     LayerMask LayerMask;
 
     Animator AnimationController;
+    BatState BatState;
 
-
+    [SerializeField]
+    float MassPerCarriedPoint = 0.1f;
+    float StartMass;
 
     private void Start()
     {
         Rigidbody = GetComponent<Rigidbody>();
         AnimationController = GetComponentInChildren<Animator>();
+        BatState = GetComponent<BatState>();
+        StartMass = Rigidbody.mass;
     }
 
     private void Update()
@@ -76,6 +81,8 @@ public class BatController : MonoBehaviour
         {
             StartTimer();
         }
+
+        Rigidbody.mass = StartMass + BatState.CarriedPoints * MassPerCarriedPoint;
     }
 
     private FlapAction GetAction()
@@ -99,7 +106,7 @@ public class BatController : MonoBehaviour
     {
         bool left = Input.GetAxisRaw("FlapL" + PlayerNumber) > ControllerDeadzone;
         bool right = Input.GetAxisRaw("FlapR" + PlayerNumber) > ControllerDeadzone;
-
+        
         if (left != LeftPressed)
         {
             if (!LeftChanged)
