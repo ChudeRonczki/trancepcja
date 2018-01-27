@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,5 +40,15 @@ public class Tran : MonoBehaviour
                 body.velocity = Vector3.zero;
             }
         }
+    }
+
+    internal void Drop(Vector3 force)
+    {
+        gameObject.SetActive(true);
+
+        if (Physics.CheckSphere(body.position, sphereCollider.radius, 1 << Game.WallsLayer))
+            body.useGravity = false;
+        else
+            body.AddForce(force, ForceMode.Impulse);
     }
 }

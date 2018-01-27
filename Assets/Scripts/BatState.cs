@@ -55,39 +55,35 @@ public class BatState : MonoBehaviour
         if (Input.GetButtonDown("Drop" + (ownerId + 1)))
         {
             DropTran();
-            lastDropTimestamp = Time.timeSinceLevelLoad;
-            ignoreTranTrigger = true;
         }
         else if (Input.GetButtonUp("Drop" + (ownerId + 1)))
         {
             if (Time.timeSinceLevelLoad - lastDropTimestamp >= ignoreTranTriggerMinTime)
                 ignoreTranTrigger = false;
-            else
-                StartCoroutine(WaitAndStopIgnoringTranTrigger());
         }
 
     }
 
     private IEnumerator WaitAndStopIgnoringTranTrigger()
     {
-        yield return new WaitForSeconds(ignoreTranTriggerMinTime - Time.timeSinceLevelLoad + lastDropTimestamp);
+        yield return new WaitForSeconds(ignoreTranTriggerMinTime);
         if (!Input.GetButton("Drop" + (ownerId + 1)))
             ignoreTranTrigger = false;
     }
 
-    private void DropTran()
+    internal void DropTran()
     {
         for (int i = 0; i < carriedTran.Count; ++i)
         {
             carriedTran[i].transform.position = transform.position;
-            carriedTran[i].gameObject.SetActive(true);
-            carriedTran[i].body.AddForce(
-                new Vector3(dropSpreadImpulse * ((float)i - carriedTran.Count / 2f), 0f),
-                ForceMode.Impulse);
+            carriedTran[i].Drop(new Vector3(dropSpreadImpulse * ((float)i - carriedTran.Count / 2f), 0f));
         }
 
         carriedTran.Clear();
         RefreshContainer();
+        lastDropTimestamp = Time.timeSinceLevelLoad;
+        ignoreTranTrigger = true;
+        StartCoroutine(WaitAndStopIgnoringTranTrigger());
     }
 
     public void LoseTran()
