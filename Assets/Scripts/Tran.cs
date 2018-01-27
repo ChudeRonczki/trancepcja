@@ -28,9 +28,16 @@ public class Tran : MonoBehaviour
             sphereCollider.radius * transform.localScale.x, body.velocity,
             out hitInfo, body.velocity.magnitude * Time.fixedDeltaTime, 1 << Game.WallsLayer))
         {
-            body.useGravity = false;
-            body.position += hitInfo.distance * body.velocity.normalized;
-            body.velocity = Vector3.zero;
+            if (Mathf.Abs(hitInfo.normal.x) > .8f)
+            {
+                body.AddForce(new Vector3(Mathf.Sign(hitInfo.normal.x) * .1f, 0f, 0f));
+            }
+            else
+            {
+                body.useGravity = false;
+                body.position += hitInfo.distance * body.velocity.normalized;
+                body.velocity = Vector3.zero;
+            }
         }
     }
 }
