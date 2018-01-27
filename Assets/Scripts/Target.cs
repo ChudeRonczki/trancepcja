@@ -12,7 +12,17 @@ public class Target : MonoBehaviour
     {
         var bat = other.GetComponent<BatState>();
         if (bat)
-            Game.Instance.GivePoints(bat);
+        {
+            bat.LoseTran();
+            return;
+        }
+
+        var tran = other.GetComponent<Tran>();
+        if (tran)
+        {
+            Game.Instance.GivePoints(tran);
+            return;
+        }
     }
 
 }

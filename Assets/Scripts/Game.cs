@@ -8,6 +8,8 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
 
+    public const int WallsLayer = 9;
+
     public int[] pointsCollected = { 0, 0 };
     public int pointsTarget = 10;
     public int lastDropAward = 2;
@@ -35,15 +37,16 @@ public class Game : MonoBehaviour
         Instance = this;
     }
 
-    internal void GivePoints(BatState bat)
+    internal void GivePoints(Tran tran)
     {
-        if (Finished)
+        if (Finished || tran.lastOwner == -1)
             return;
 
-        pointsCollected[bat.ownerId] += Mathf.Min(bat.carriedPoints, pointsTarget - TotalPointsCollected);
-        bat.carriedPoints = 0;
+        pointsCollected[tran.lastOwner] += Mathf.Min(tran.pointsWorth, pointsTarget - TotalPointsCollected);
         if (Finished)
-            pointsCollected[bat.ownerId] += lastDropAward;
+            pointsCollected[tran.lastOwner] += lastDropAward;
+
+        Destroy(tran.gameObject);
 
         if (StateChanged != null)
             StateChanged();

@@ -23,13 +23,12 @@ public class Hud : MonoBehaviour
 
         if (Game.Instance.Finished)
         {
-            int maxIndex = 0;
-            for (int i = 1; i < Game.Instance.pointsCollected.Length; ++i)
-            {
-                if (Game.Instance.pointsCollected[i] > Game.Instance.pointsCollected[maxIndex])
-                    maxIndex = i;
-            }
-            winnerLabel.text = String.Format("Player {0} Wins", maxIndex + 1);
+            if (Game.Instance.pointsCollected[0] > Game.Instance.pointsCollected[1])
+                winnerLabel.text = "Player 1 Wins";
+            else if (Game.Instance.pointsCollected[0] < Game.Instance.pointsCollected[1])
+                winnerLabel.text = "Player 2 Wins";
+            else
+                winnerLabel.text = "Even Game";
         }
         else
             winnerLabel.text = "";
