@@ -72,6 +72,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29488247d72a421499f88fe934962787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsCollected: 0000000000000000
   pointsTarget: 10
   lastDropAward: 2
+  matchPrefab: {fileID: 114654432992138432, guid: b6d165eff6fc2294b90ac41c47835de5,
+    type: 2}
+  pointsCollected: 0000000000000000

@@ -8,7 +8,9 @@ using System.Linq;
 public class Hud : MonoBehaviour
 {
     public Text progressLabel;
+    public GameObject finishRoot;
     public Text winnerLabel;
+    public Text[] playerTotalLabels;
 
     private void Start()
     {
@@ -23,14 +25,22 @@ public class Hud : MonoBehaviour
 
         if (Game.Instance.Finished)
         {
-            if (Game.Instance.pointsCollected[0] > Game.Instance.pointsCollected[1])
+            finishRoot.SetActive(true);
+
+            if (Game.Instance.Winner == 0)
                 winnerLabel.text = "Player 1 Wins";
-            else if (Game.Instance.pointsCollected[0] < Game.Instance.pointsCollected[1])
+            else if (Game.Instance.Winner == 1)
                 winnerLabel.text = "Player 2 Wins";
             else
                 winnerLabel.text = "Even Game";
+
+            for (int i = 0; i < playerTotalLabels.Length; ++i)
+            {
+                playerTotalLabels[i].text = String.Format("Player {0}: {1}", i + 1,
+                    Match.Instance.gamesWon[i]);
+            }
         }
         else
-            winnerLabel.text = "";
+            finishRoot.SetActive(false);
     }
 }

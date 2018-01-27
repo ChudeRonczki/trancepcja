@@ -11,9 +11,12 @@ public class Game : MonoBehaviour
     public const int WallsLayer = 9;
     public const int CollectiblesLayer = 11;
 
-    public int[] pointsCollected = { 0, 0 };
     public int pointsTarget = 10;
     public int lastDropAward = 2;
+
+    public Match matchPrefab;
+
+    public int[] pointsCollected = { 0, 0 };
 
     public event Action StateChanged;
 
@@ -33,9 +36,27 @@ public class Game : MonoBehaviour
         }
     }
 
+    public int Winner
+    {
+        get
+        {
+            if (Finished)
+            {
+                if (pointsCollected[0] > pointsCollected[1])
+                    return 0;
+                if (pointsCollected[1] > pointsCollected[0])
+                    return 1;
+            }
+
+            return -1;
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
+        if (Match.Instance == null)
+            Instantiate(matchPrefab);
     }
 
     internal void GivePoints(Tran tran)
@@ -45,11 +66,21 @@ public class Game : MonoBehaviour
 
         pointsCollected[tran.lastOwner] += Mathf.Min(tran.pointsWorth, pointsTarget - TotalPointsCollected);
         if (Finished)
+        {
             pointsCollected[tran.lastOwner] += lastDropAward;
+            if (Winner != -1)
+                ++Match.Instance.gamesWon[Winner];
+        }
 
         Destroy(tran.gameObject);
 
         if (StateChanged != null)
             StateChanged();
+    }
+
+    private void Update()
+    {
+        if (Finished && Input.GetButtonDown("Proceed"))
+            Match.Instance.Proceed();
     }
 }
