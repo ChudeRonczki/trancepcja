@@ -76,7 +76,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4962930237614768}
   - component: {fileID: 33312410187407004}
-  - component: {fileID: 65165113450432374}
   - component: {fileID: 23194633098661914}
   m_Layer: 0
   m_Name: Container
@@ -131,7 +130,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292385959484700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.22, y: 5.51, z: 0}
+  m_LocalPosition: {x: -6.95, y: 5.51, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4582914983657220}
@@ -319,18 +318,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 56
   m_CollisionDetection: 1
---- !u!65 &65165113450432374
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1545808720352522}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114207081712985180
 MonoBehaviour:
   m_ObjectHideFlags: 1
