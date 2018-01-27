@@ -48,9 +48,14 @@ public class BatController : MonoBehaviour
     [SerializeField]
     LayerMask LayerMask;
 
+    Animator AnimationController;
+
+
+
     private void Start()
     {
         Rigidbody = GetComponent<Rigidbody>();
+        AnimationController = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -70,11 +75,6 @@ public class BatController : MonoBehaviour
         else if (LeftChanged || RightChanged)
         {
             StartTimer();
-        }
-
-        if (Input.GetButtonDown("Drop" + PlayerNumber))
-        {
-            Rigidbody.AddTorque(transform.forward * 50f, ForceMode.Impulse);
         }
     }
 
@@ -130,15 +130,23 @@ public class BatController : MonoBehaviour
         if (action == FlapAction.FlapLeft)
         {
             Flip(1f);
+            AnimationController.SetTrigger("FlapL");
+            AnimationController.SetTrigger("Bob");
         }
         else if (action == FlapAction.FlapRight)
         {
             Flip(-1f);
+            AnimationController.SetTrigger("FlapR");
+            AnimationController.SetTrigger("Bob");
         }
         else if (action == FlapAction.FlapBoth)
         {
             var moveVector = Vector3.up * PushForceSingleWing * 0.5f + transform.up * MoveForceBothWings;
             Rigidbody.AddForce(moveVector, ForceMode.Impulse);
+
+            AnimationController.SetTrigger("FlapL");
+            AnimationController.SetTrigger("FlapR");
+            AnimationController.SetTrigger("Bob");
         }
 
         if (action != FlapAction.None)
