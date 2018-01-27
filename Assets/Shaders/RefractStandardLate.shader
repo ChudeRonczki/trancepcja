@@ -1,6 +1,6 @@
 ﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
 
-Shader "Custom/RefractStandard" {
+Shader "Custom/RefractStandardLate" {
 	Properties {
 		_Color ("Color", Color) = (1,1,1,1)
 		_Glossiness ("Smoothness", Range(0,1)) = 0.5
@@ -14,10 +14,10 @@ Shader "Custom/RefractStandard" {
 		_WaveScale("Waving Scale", Float) = 1.0
 	}
 	SubShader {
-		Tags { "Queue"="Transparent" "RenderType"="Transparent" }
+		Tags { "Queue"="Transparent+10" "RenderType"="Transparent" }
 
 		LOD 200
-		GrabPass { "_GrabTex" }
+		GrabPass { "_GrabTex2" }
 
 		CGPROGRAM
 		// Physically based Standard lighting model, and enable shadows on all light types
@@ -52,8 +52,8 @@ Shader "Custom/RefractStandard" {
 		half _Refraction;
 		fixed4 _Color;
 		fixed4 _RefractionColor;
-        sampler2D _GrabTex;
-		float4 _GrabTex_TexelSize;
+        sampler2D _GrabTex2;
+		float4 _GrabTex2_TexelSize;
 
 		void surf (Input IN, inout SurfaceOutputStandard o) {
 			// Albedo comes from a texture tinted by color
@@ -81,7 +81,7 @@ Shader "Custom/RefractStandard" {
 
 			half transparency = saturate(1 - _Transparency + 1 - rimValue);
 			o.Albedo = _Color.rgb * transparency;
-            o.Emission = tex2Dproj(  _GrabTex, UNITY_PROJ_COORD(IN.screenPos)).rgb * (1 - transparency) * _RefractionColor;
+            o.Emission = tex2Dproj(  _GrabTex2, UNITY_PROJ_COORD(IN.screenPos)).rgb * (1 - transparency) * _RefractionColor;
 			// Metallic and smoothness come from slider variables
 			o.Metallic = _Metallic;
 			o.Smoothness = _Glossiness;

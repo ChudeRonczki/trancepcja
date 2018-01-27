@@ -47,6 +47,9 @@ public class BatController : MonoBehaviour
     [SerializeField]
     float MassPerCarriedPoint = 0.1f;
     float StartMass;
+    
+    [SerializeField]
+    bool InverseDirections = false;
 
     private void Start()
     {
@@ -84,10 +87,20 @@ public class BatController : MonoBehaviour
         bool right = RightChanged && RightPressed;
         bool both = left && right;
 
-        if (both) return FlapAction.FlapBoth;
-        else if (left) return FlapAction.FlapLeft;
-        else if (right) return FlapAction.FlapRight;
-        else return FlapAction.None;
+        if (InverseDirections)
+        {
+            if (both) return FlapAction.FlapBoth;
+            else if (left) return FlapAction.FlapRight;
+            else if (right) return FlapAction.FlapLeft;
+            else return FlapAction.None;
+        }
+        else
+        {
+            if (both) return FlapAction.FlapBoth;
+            else if (left) return FlapAction.FlapLeft;
+            else if (right) return FlapAction.FlapRight;
+            else return FlapAction.None;
+        }
     }
 
     private void StartTimer()
