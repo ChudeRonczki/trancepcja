@@ -26,9 +26,9 @@ public class Tran : MonoBehaviour
         RaycastHit hitInfo;
         if (body.useGravity && Physics.SphereCast(body.position,
             sphereCollider.radius * transform.localScale.x, body.velocity,
-            out hitInfo, body.velocity.magnitude * Time.fixedDeltaTime, 1 << Game.WallsLayer))
+            out hitInfo, body.velocity.magnitude * Time.fixedDeltaTime * 2f, 1 << Game.WallsLayer))
         {
-            if (Mathf.Abs(hitInfo.normal.x) > .8f)
+            if (Mathf.Abs(hitInfo.normal.x) > .9f)
             {
                 body.AddForce(new Vector3(Mathf.Sign(hitInfo.normal.x) * .1f, 0f, 0f));
             }
