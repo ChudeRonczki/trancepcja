@@ -31,6 +31,8 @@ public class MainMenu : MonoBehaviour
             items[i].color = i == activeId
                 ? activeColor
                 : inactiveColor;
+
+            items[i].GetComponent<Shadow>().enabled = (i == activeId);
         }
     }
 
