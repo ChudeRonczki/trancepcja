@@ -101,7 +101,7 @@ public class Game : MonoBehaviour
             if (Winner != -1)
                 ++Match.Instance.gamesWon[Winner];
 
-            Time.timeScale = 0f;
+            StartCoroutine(EaseTimeStop());
             Match.Instance.HandleGameFinished();
         }
 
@@ -109,6 +109,17 @@ public class Game : MonoBehaviour
 
         if (StateChanged != null)
             StateChanged();
+    }
+
+    private IEnumerator EaseTimeStop()
+    {
+        for (float time = 1f; time > 0f; time -= Time.unscaledDeltaTime)
+        {
+            Time.timeScale = time;
+            yield return null;
+        }
+
+        Time.timeScale = 0f;
     }
 
     private void Update()

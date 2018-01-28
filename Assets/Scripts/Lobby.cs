@@ -22,12 +22,16 @@ public class Lobby : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (Match.Instance == null)
+            Instantiate(matchPrefab);
+    }
+
     void Update ()
     {
 		if (AllReady)
         {
-            if (Match.Instance == null)
-                Instantiate(matchPrefab);
             Match.Instance.Proceed();
         }
 	}
