@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,7 +14,7 @@ public class BatRespawner : MonoBehaviour
     Rigidbody body;
     Vector3 initialPosition;
 
-    public AudioSource DeathSound;
+    public AudioClip DeathSound;
 
     private void Awake()
     {
@@ -31,11 +30,7 @@ public class BatRespawner : MonoBehaviour
         state.LoseTran();
         StartCoroutine(Respawn());
 
-        if (DeathSound)
-        {
-            DeathSound.pitch = UnityEngine.Random.value * 0.2f + 1.4f;
-            DeathSound.Play();
-        }
+        AudioManager.Play(DeathSound, 1.4f, 1.6f);
     }
 
     private IEnumerator Respawn()

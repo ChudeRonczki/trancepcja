@@ -52,7 +52,7 @@ public class BatController : MonoBehaviour
     
     bool InverseDirections = true;
 
-    public AudioSource FlapSound;
+    public AudioClip FlapSound;
 
     private void Start()
     {
@@ -90,11 +90,7 @@ public class BatController : MonoBehaviour
         {
             StartTimer();
 
-            if (FlapSound)
-            {
-                FlapSound.pitch = Random.value * 0.2f + 0.8f;
-                FlapSound.Play();
-            }
+            AudioManager.Play(FlapSound, 0.8f, 1f);
         }
 
         Rigidbody.mass = StartMass + BatState.CarriedPoints * MassPerCarriedPoint;

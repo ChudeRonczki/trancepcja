@@ -1055,7 +1055,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292385959484700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: 9.6, z: 0}
+  m_LocalPosition: {x: -8, y: 1.3, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4582914983657220}
@@ -1385,7 +1385,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   MassPerCarriedPoint: 0.085
-  FlapSound: {fileID: 0}
+  FlapSound: {fileID: 8300000, guid: 594f6c13d49129541b21f5d770bd1a9a, type: 3}
 --- !u!114 &114665385739947248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1403,7 +1403,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: dc739829b7b37864984ca200a14968ca, type: 3}
   - {fileID: 21300000, guid: 21c611be1ea92a2438aada0acf77e566, type: 3}
   - {fileID: 21300000, guid: e86d975bfcbde2f4ab20245e5534b976, type: 3}
-  DeathSound: {fileID: 0}
+  DeathSound: {fileID: 8300000, guid: b2cf6ca6de4848d4b9b905842886f49b, type: 3}
 --- !u!114 &114768842176653136
 MonoBehaviour:
   m_ObjectHideFlags: 1
