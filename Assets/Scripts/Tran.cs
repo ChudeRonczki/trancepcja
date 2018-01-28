@@ -31,7 +31,7 @@ public class Tran : MonoBehaviour
         {
             if (Mathf.Abs(hitInfo.normal.x) > .9f)
             {
-                body.AddForce(new Vector3(Mathf.Sign(hitInfo.normal.x) * .1f, 0f, 0f));
+                body.AddForce(new Vector3(Mathf.Sign(hitInfo.normal.x) * Mathf.Abs(body.velocity.x), 0f, 0f), ForceMode.Impulse);
             }
             else
             {

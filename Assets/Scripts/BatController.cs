@@ -50,7 +50,7 @@ public class BatController : MonoBehaviour
     float MassPerCarriedPoint = 0.1f;
     float StartMass;
     
-    bool InverseDirections = false;
+    bool InverseDirections = true;
 
     private void Start()
     {
@@ -67,7 +67,9 @@ public class BatController : MonoBehaviour
         if (Input.GetButtonDown("Invert" + PlayerNumber))
         {
             InverseDirections = !InverseDirections;
-            Match.Instance.inverseDirections[GetComponent<BatState>().ownerId] = InverseDirections;
+
+            if (Match.Instance)
+                Match.Instance.inverseDirections[GetComponent<BatState>().ownerId] = InverseDirections;
         }
 
         CaptureInput();

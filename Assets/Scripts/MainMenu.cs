@@ -65,7 +65,15 @@ public class MainMenu : MonoBehaviour
     private void Proceed()
     {
         if (activeId == 3)
+        {
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_WEBPLAYER
+            Application.OpenURL(webplayerQuitURL);
+#else
             Application.Quit();
+#endif
+        }
         else
         {
             var match = Instantiate<Match>(matchPrefab);

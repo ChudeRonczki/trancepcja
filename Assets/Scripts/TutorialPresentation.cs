@@ -6,20 +6,22 @@ public class TutorialPresentation : MonoBehaviour
 {
     public enum PresentationType
     {
-        TurnLeft = 0,
-        TurnRight,
-        FlapBoth,
-        Hover
+        Turn,
+        FlapBoth
     }
 
     public PresentationType Type;
     public float Duration = 1f;
+    public float SpriteDuration = 0.5f;
     public float ScaleY = 1f;
     public float time = 0f;
-    bool hoverLeft = false;
+    bool turnLeft = false;
+    bool firstTurn = true;
 
     Animator animator;
     Rigidbody Rigidbody;
+
+    public SpriteRenderer[] Sprites = new SpriteRenderer[2];
 
     private void Start()
     {
@@ -37,7 +39,7 @@ public class TutorialPresentation : MonoBehaviour
             time -= Duration;
             flipped = true;
         }
-
+        
         if (Type == PresentationType.FlapBoth)
         {
             float x = time / Duration;
@@ -54,31 +56,9 @@ public class TutorialPresentation : MonoBehaviour
                 animator.SetTrigger("FlapL");
                 animator.SetTrigger("Bob");
             }
-        }
-        else if (Type == PresentationType.Hover)
-        {
-            float x = time / Duration;
 
-            x = (x + 0.1f) % 1f;
-
-            float y = -4f * x * x + 4 * x;
-            transform.localPosition = new Vector3(0f, y * ScaleY, 0f);
-            transform.localEulerAngles = new Vector3(0f, 0f, Mathf.Sin(Time.time) * 30f);
-
-            if (flipped)
-            {
-                if (hoverLeft)
-                {
-                    animator.SetTrigger("FlapL");
-                }
-                else
-                {
-                    animator.SetTrigger("FlapR");
-                }
-
-                animator.SetTrigger("Bob");
-                hoverLeft = !hoverLeft;
-            }
+            Sprites[0].enabled = time < SpriteDuration;
+            Sprites[1].enabled = time < SpriteDuration;
         }
         else
         {
@@ -86,10 +66,10 @@ public class TutorialPresentation : MonoBehaviour
             x = (x + 0.1f) % 1f;
             float y = -4f * x * x + 4 * x;
             transform.localPosition = new Vector3(0f, y * ScaleY, 0f);
-
+            
             if (flipped)
             {
-                if (Type == PresentationType.TurnLeft)
+                if (turnLeft)
                 {
                     animator.SetTrigger("FlapL");
                 }
@@ -99,8 +79,26 @@ public class TutorialPresentation : MonoBehaviour
                 }
 
                 animator.SetTrigger("Bob");
-                float direction = (Type == PresentationType.TurnLeft) ? 1f : -1f;
+                float direction = (turnLeft) ? 1f : -1f;
                 Rigidbody.AddTorque(direction * transform.forward * 10f, ForceMode.Impulse);
+
+                if (!firstTurn)
+                {
+                    turnLeft = !turnLeft;
+                }
+
+                firstTurn = !firstTurn;
+            }
+
+            if ((turnLeft && firstTurn) || (!turnLeft && !firstTurn))
+            {
+                Sprites[0].enabled = time < SpriteDuration;
+                Sprites[1].enabled = false;
+            }
+            else
+            {
+                Sprites[0].enabled = false;
+                Sprites[1].enabled = time < SpriteDuration;
             }
         }
     }
