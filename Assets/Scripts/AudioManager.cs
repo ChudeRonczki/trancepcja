@@ -6,9 +6,13 @@ public class AudioManager : MonoBehaviour
 {
     private static AudioManager instance;
     public static AudioManager Instance { get { return instance; } }
-    
-    AudioSource[] AudioSources;
+
+    public AudioClip[] MusicList = new AudioClip[2];
+
+    List<AudioSource> AudioSources = new List<AudioSource>();
     int index = 0;
+
+    AudioSource MusicSource;
 
     private void Awake()
     {
@@ -17,7 +21,15 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        AudioSources = GetComponents<AudioSource>();
+        transform.GetComponents<AudioSource>(AudioSources);
+        MusicSource = GetComponentInChildren<AudioSource>();
+        AudioSources.Remove(MusicSource);
+
+        if (MusicSource != null && MusicList.Length > 0)
+        {
+            MusicSource.clip = MusicList[Random.Range(0, MusicList.Length)];
+            MusicSource.Play();
+        }
     }
 
     public static void Play(AudioClip clip)
@@ -33,7 +45,7 @@ public class AudioManager : MonoBehaviour
         AudioSources[index].clip = clip;
         AudioSources[index].pitch = 1f;
         AudioSources[index].Play();
-        index = (index + 1) % AudioSources.Length;
+        index = (index + 1) % AudioSources.Count;
     }
 
     public static void Play(AudioClip clip, float minPitch, float maxPitch)
@@ -49,6 +61,6 @@ public class AudioManager : MonoBehaviour
         AudioSources[index].clip = clip;
         AudioSources[index].pitch = minPitch + (maxPitch - minPitch) * Random.value;
         AudioSources[index].Play();
-        index = (index + 1) % AudioSources.Length;
+        index = (index + 1) % AudioSources.Count;
     }
 }
