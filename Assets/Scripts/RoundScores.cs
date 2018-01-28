@@ -14,15 +14,15 @@ public class RoundScores : MonoBehaviour
             return;
 
         if (Game.Instance.Winner == 0)
-            winnerLabel.text = "Round for Player 1";
+            winnerLabel.text = "ROUND FOR PLAYER 1";
         else if (Game.Instance.Winner == 1)
-            winnerLabel.text = "Round for Player 2";
+            winnerLabel.text = "ROUND FOR PLAYER 2";
         else
-            winnerLabel.text = "Round ends with a draw";
+            winnerLabel.text = "ROUND ENDS WITH A DRAW";
 
         for (int i = 0; i < playerScoresLabels.Length; ++i)
         {
-            playerScoresLabels[i].text = string.Format("Player {0}: {1}", i + 1,
+            playerScoresLabels[i].text = string.Format("PLAYER {0}: {1}", i + 1,
                 Game.Instance.pointsCollected[i]);
         }
     }

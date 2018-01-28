@@ -7,7 +7,6 @@ using System.Linq;
 
 public class Hud : MonoBehaviour
 {
-    public Text progressLabel;
     public GameObject finishRoot;
     public GameObject[] finishPages;
     int currentFinishPage = 0;
@@ -29,9 +28,6 @@ public class Hud : MonoBehaviour
 
     private void Refresh()
     {
-        progressLabel.text = String.Format("{0}/{1}", Game.Instance.TotalPointsCollected,
-            Game.Instance.pointsTarget);
-
         if (Game.Instance.Finished && !finishRoot.activeSelf)
         {
             finishRoot.SetActive(true);

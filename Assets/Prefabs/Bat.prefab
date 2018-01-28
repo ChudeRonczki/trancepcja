@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 224272653062208506}
   - component: {fileID: 222246277318937356}
   - component: {fileID: 114951818492069564}
+  - component: {fileID: 114190716633138152}
   m_Layer: 8
   m_Name: TimeToRespawn
   m_TagString: Untagged
@@ -1310,6 +1311,20 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114190716633138152
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1268059933453968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1573420865, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: -3, y: -3}
+  m_UseGraphicAlpha: 1
 --- !u!114 &114207081712985180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1346,13 +1361,12 @@ MonoBehaviour:
   MoveForceSingleWing: 10
   PushForceSingleWing: 10
   MoveForceBothWings: 18
-  CounterAngleTurnForce: 0.5
+  CounterAngleTurnForce: 1
   InputLag: 0.05
   LayerMask:
     serializedVersion: 2
     m_Bits: 512
   MassPerCarriedPoint: 0.085
-  InverseDirections: 0
 --- !u!114 &114665385739947248
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1413,7 +1427,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e89c9e44cec642940bbd7a313bde2c50, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
     m_BestFit: 0
