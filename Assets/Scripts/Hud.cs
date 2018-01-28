@@ -24,6 +24,8 @@ public class Hud : MonoBehaviour
         Refresh();
         Game.Instance.StateChanged += Refresh;
         finishRoot.SetActive(false);
+
+		GetComponent<Canvas>().worldCamera = Camera.main;
     }
 
     private void Refresh()

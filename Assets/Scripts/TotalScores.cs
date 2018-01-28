@@ -8,8 +8,11 @@ public class TotalScores : MonoBehaviour
     public Text progressLabel;
     public Text[] playerTotalLabels;
     public Text restartHintLabel;
+	public GameObject m_TranekWin;
+	public GameObject m_TraniaWin;
 
-    bool alreadyFlipped = false;
+
+	bool alreadyFlipped = false;
 
     private void OnEnable()
     {
@@ -29,7 +32,11 @@ public class TotalScores : MonoBehaviour
             //}
             progressLabel.gameObject.SetActive(false);
             restartHintLabel.gameObject.SetActive(true);
-        }
+
+			m_TranekWin.SetActive(Match.Instance.gamesWon[1] < Match.Instance.gamesWon[0]);
+			m_TraniaWin.SetActive(Match.Instance.gamesWon[1] > Match.Instance.gamesWon[0]);
+
+		}
         else
         {
             progressLabel.text = string.Format("GAME {0}/{1}",
