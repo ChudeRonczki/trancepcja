@@ -114,6 +114,12 @@ MonoBehaviour:
   - {fileID: 114867193758496984, guid: 09be2b528f1ff2646a1f72aef10a283d, type: 2}
   - {fileID: 114472677680639388, guid: 46f08dbbc0f2eaf4798bd987c39d12ed, type: 2}
   - {fileID: 114560830274963232, guid: aa91e3e5705b7ba4c8022f7d86d7f10a, type: 2}
+  PreSpawnParticles:
+  - {fileID: 198349600317517720, guid: d08cdca98c52fa445a714aa96f7a257f, type: 2}
+  - {fileID: 198235684124975008, guid: a93b26e25a9f40344b023e5834a145c9, type: 2}
+  - {fileID: 198739239159157480, guid: da5cbbb144f91774a952ccd25eb5cb00, type: 2}
+  AfterSpawnParticles: {fileID: 198217531107602682, guid: d210413c8a2d408439e9b50332f75737,
+    type: 2}
 --- !u!114 &114352548318038874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -206,8 +212,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29488247d72a421499f88fe934962787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pointsTarget: 10
-  lastDropAward: 2
+  pointsTarget: 25
+  lastDropAward: 4
   matchPrefab: {fileID: 114654432992138432, guid: b6d165eff6fc2294b90ac41c47835de5,
     type: 2}
   pointsCollected: 0000000000000000
