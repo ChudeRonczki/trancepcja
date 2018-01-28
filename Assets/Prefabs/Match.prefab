@@ -52,6 +52,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - Test
-  - Test2
+  - Level1
+  - Level2
+  - Level3
+  - Level4
+  - Level5
+  - Level6
   gamesWon: 0000000000000000
+  mapsToPlay: 3
+  mapsPlayed: 0
+  inverseDirections: 0101
