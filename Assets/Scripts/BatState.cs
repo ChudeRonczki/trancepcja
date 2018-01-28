@@ -22,14 +22,17 @@ public class BatState : MonoBehaviour
     }
     public List<Tran> carriedTran = new List<Tran>();
     public bool ignoreTranTrigger = false;
+    public ParticleSystem tranCollectParticles;
 
 
+    ParticleSystem tranParticleSystem;
     float lastDropTimestamp;
     Rigidbody body;
 
     private void Start()
     {
         body = GetComponent<Rigidbody>();
+        tranParticleSystem = tranContainer.GetComponentInChildren<ParticleSystem>();
         RefreshContainer();
     }
 
@@ -39,10 +42,23 @@ public class BatState : MonoBehaviour
         {
             float scale = containerStartScale + CarriedPoints * containerScalePerPoint;
             tranContainer.localScale = new Vector3(scale, scale, scale);
+            if (tranParticleSystem)
+            {
+                var emi = tranParticleSystem.emission;
+                emi.rateOverTime = 1f + 0.5f * CarriedPoints;
+                var shap = tranParticleSystem.shape;
+                shap.radius = scale * 0.1f;
+            }
         }
         else
         {
             tranContainer.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            
+            if (tranParticleSystem)
+            {
+                var emi = tranParticleSystem.emission;
+                emi.rateOverTime = 0;
+            }
         }
     }
 
@@ -57,6 +73,7 @@ public class BatState : MonoBehaviour
             tran.gameObject.SetActive(false);
             tran.lastOwner = ownerId;
             RefreshContainer();
+            if (tranCollectParticles) Instantiate(tranCollectParticles, tran.transform.position, Quaternion.identity);
         }
     }
 
