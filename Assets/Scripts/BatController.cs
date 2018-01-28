@@ -52,6 +52,8 @@ public class BatController : MonoBehaviour
     
     bool InverseDirections = true;
 
+    public AudioSource FlapSound;
+
     private void Start()
     {
         Rigidbody = GetComponent<Rigidbody>();
@@ -87,6 +89,9 @@ public class BatController : MonoBehaviour
         else if (LeftChanged || RightChanged)
         {
             StartTimer();
+            
+            FlapSound.pitch = Random.value * 0.2f + 0.8f;
+            FlapSound.Play();
         }
 
         Rigidbody.mass = StartMass + BatState.CarriedPoints * MassPerCarriedPoint;

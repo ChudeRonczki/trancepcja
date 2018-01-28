@@ -14,6 +14,8 @@ public class BatRespawner : MonoBehaviour
     Rigidbody body;
     Vector3 initialPosition;
 
+    public AudioSource DeathSound;
+
     private void Awake()
     {
         controller = GetComponent<BatController>();
@@ -27,6 +29,8 @@ public class BatRespawner : MonoBehaviour
     {
         state.LoseTran();
         StartCoroutine(Respawn());
+        DeathSound.pitch = UnityEngine.Random.value * 0.2f + 1.4f;
+        DeathSound.Play();
     }
 
     private IEnumerator Respawn()
