@@ -20,7 +20,8 @@ public class Game : MonoBehaviour
     public int[] pointsCollected = { 0, 0 };
 
     public GameObject countdownRoot;
-    public Text countdownLabel;
+    public Image countdownImage;
+    public Sprite[] countdownSprites;
 
     public event Action StateChanged;
 
@@ -78,10 +79,10 @@ public class Game : MonoBehaviour
         countdownRoot.SetActive(true);
         for (int i = 3; i > 0; --i)
         {
-            countdownLabel.text = i.ToString();
+            countdownImage.sprite = countdownSprites[i - 1];
             for (float time = 1f; time > 0f; time -= Time.unscaledDeltaTime)
             {
-                countdownLabel.rectTransform.localScale = new Vector3(time, time);
+                countdownImage.rectTransform.localScale = new Vector3(time, time);
                 yield return null;
             }
         }
