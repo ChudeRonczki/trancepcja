@@ -9,6 +9,8 @@ public class TotalScores : MonoBehaviour
     public Text[] playerTotalLabels;
     public Text restartHintLabel;
 
+    bool alreadyFlipped = false;
+
     private void OnEnable()
     {
         if (Match.Instance == null)
@@ -25,6 +27,7 @@ public class TotalScores : MonoBehaviour
                     progressLabel.text = string.Format("PLAYER {0} WON!", Match.Instance.WinnerId);
                     break;
             }
+
             restartHintLabel.gameObject.SetActive(true);
         }
         else
@@ -39,5 +42,18 @@ public class TotalScores : MonoBehaviour
             playerTotalLabels[i].text = string.Format("PLAYER {0}: {1}", i + 1,
                 Match.Instance.gamesWon[i]);
         }
+
+        if (Match.Instance.gamesWon[1] > Match.Instance.gamesWon[0] && !alreadyFlipped)
+            FlipLabelPositions();
+    }
+
+    private void FlipLabelPositions()
+    {
+        alreadyFlipped = true;
+
+        Vector3 temp = playerTotalLabels[0].rectTransform.localPosition;
+        playerTotalLabels[0].rectTransform.localPosition
+            = playerTotalLabels[1].rectTransform.localPosition;
+        playerTotalLabels[1].rectTransform.localPosition = temp;
     }
 }

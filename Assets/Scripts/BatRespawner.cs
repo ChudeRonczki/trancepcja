@@ -29,8 +29,12 @@ public class BatRespawner : MonoBehaviour
     {
         state.LoseTran();
         StartCoroutine(Respawn());
-        DeathSound.pitch = UnityEngine.Random.value * 0.2f + 1.4f;
-        DeathSound.Play();
+
+        if (DeathSound)
+        {
+            DeathSound.pitch = UnityEngine.Random.value * 0.2f + 1.4f;
+            DeathSound.Play();
+        }
     }
 
     private IEnumerator Respawn()

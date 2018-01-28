@@ -89,9 +89,12 @@ public class BatController : MonoBehaviour
         else if (LeftChanged || RightChanged)
         {
             StartTimer();
-            
-            FlapSound.pitch = Random.value * 0.2f + 0.8f;
-            FlapSound.Play();
+
+            if (FlapSound)
+            {
+                FlapSound.pitch = Random.value * 0.2f + 0.8f;
+                FlapSound.Play();
+            }
         }
 
         Rigidbody.mass = StartMass + BatState.CarriedPoints * MassPerCarriedPoint;
