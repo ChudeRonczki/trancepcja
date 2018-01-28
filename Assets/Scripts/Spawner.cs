@@ -8,6 +8,8 @@ public class Spawner : MonoBehaviour
     public float spawnInterval = 4f;
     public float[] probabilites = { 1f, .3f, .1f };
     public Tran[] prefabs = new Tran[3];
+    public ParticleSystem[] PreSpawnParticles = new ParticleSystem[3];
+    public ParticleSystem AfterSpawnParticles;
 
     SpawnPoint[] spawnPoints;
     SpawnPoint lastUsed;
@@ -36,6 +38,7 @@ public class Spawner : MonoBehaviour
 
                 float acc = 0f;
                 Tran chosenPrefab = prefabs[0];
+                ParticleSystem particles = PreSpawnParticles[0];
 
                 for (int i = 0; i < prefabs.Length; ++i)
                 {
@@ -43,11 +46,17 @@ public class Spawner : MonoBehaviour
                     if (roll <= acc)
                     {
                         chosenPrefab = prefabs[i];
+                        particles = PreSpawnParticles[i];
                         break;
                     }
                 }
+                
+                if (particles) Instantiate(particles, spawnToUse.transform.position, Quaternion.identity);
+
+                yield return new WaitForSeconds(3.0f);
 
                 Instantiate(chosenPrefab, spawnToUse.transform.position, Quaternion.identity);
+                if (AfterSpawnParticles) Instantiate(AfterSpawnParticles, spawnToUse.transform.position, Quaternion.identity);
             }
         }
     }
