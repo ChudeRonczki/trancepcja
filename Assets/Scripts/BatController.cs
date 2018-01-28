@@ -27,6 +27,8 @@ public class BatController : MonoBehaviour
     [SerializeField]
     public float MoveForceBothWings = 15.0f;
 
+    public float CounterAngleTurnForce = .5f;
+
     bool LeftPressed = false;
     bool RightPressed = false;
 
@@ -115,19 +117,19 @@ public class BatController : MonoBehaviour
         
         if (left != LeftPressed)
         {
-            if (!LeftChanged)
+            LeftPressed = !LeftPressed;
+            if (!LeftChanged && LeftPressed)
             {
                 LeftChanged = true;
-                LeftPressed = !LeftPressed;
             }
         }
 
         if (right != RightPressed)
         {
-            if (!RightChanged)
+            RightPressed = !RightPressed;
+            if (!RightChanged && RightPressed)
             {
                 RightChanged = true;
-                RightPressed = !RightPressed;
             }
         }
     }
@@ -165,7 +167,9 @@ public class BatController : MonoBehaviour
 
     private void Flip(float direction)
     {
-        Rigidbody.AddTorque(direction * transform.forward * TurnForce, ForceMode.Impulse);
+        float CounterForce = Vector3.Dot(transform.up, new Vector3(direction, 0f, 0f)) * CounterAngleTurnForce;
+
+        Rigidbody.AddTorque(direction * transform.forward * (TurnForce + CounterForce), ForceMode.Impulse);
         var moveVector = Vector3.up * PushForceSingleWing + transform.forward * PushForceSingleWing;
         Rigidbody.AddForce(moveVector, ForceMode.Impulse);
 

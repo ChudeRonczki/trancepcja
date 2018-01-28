@@ -1264,7 +1264,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1292385959484700}
   serializedVersion: 2
-  m_Mass: 4
+  m_Mass: 3
   m_Drag: 1
   m_AngularDrag: 5
   m_UseGravity: 1
@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownerId: 0
   ignoreTranTriggerMinTime: 0.25
-  dropSpreadImpulse: 0.5
+  dropSpreadImpulse: 0.35
   tranContainer: {fileID: 4288142244859550}
   containerScalePerPoint: 3
   containerStartScale: 12
@@ -1346,11 +1346,12 @@ MonoBehaviour:
   MoveForceSingleWing: 10
   PushForceSingleWing: 10
   MoveForceBothWings: 18
+  CounterAngleTurnForce: 0.5
   InputLag: 0.05
   LayerMask:
     serializedVersion: 2
     m_Bits: 512
-  MassPerCarriedPoint: 0.1
+  MassPerCarriedPoint: 0.085
   InverseDirections: 0
 --- !u!114 &114665385739947248
 MonoBehaviour:
