@@ -41,7 +41,7 @@ Shader "Custom/RefractStandard" {
 				if (ShouldWave(v.color.r))
 				{
 					float3 normal;
-					v.vertex.xyz += mul(unity_WorldToObject, WaveVertex2D(mul(unity_ObjectToWorld, v.vertex), 1, normal));
+					v.vertex.xyz += mul(unity_WorldToObject, WaveVertex2D(mul(unity_ObjectToWorld, v.vertex), v.color.r, normal));
 					v.normal = UnityWorldToObjectDir(normal);
 				}
 			#endif
