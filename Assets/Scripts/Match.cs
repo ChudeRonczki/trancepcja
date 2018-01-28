@@ -19,6 +19,9 @@ public class Match : MonoBehaviour
 
     public bool[] inverseDirections = { true, true };
 
+    string[] shuffledLevels;
+    int shuffledLevelId = -1;
+
     public bool Finished
     {
         get
@@ -46,6 +49,7 @@ public class Match : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(this);
+        shuffledLevels = levels.Skip(1).OrderBy(level => UnityEngine.Random.value).ToArray();
     }
 
     internal void HandleGameFinished()
@@ -56,13 +60,18 @@ public class Match : MonoBehaviour
     internal void Proceed()
     {
         int lastIndex = Array.IndexOf(levels, SceneManager.GetActiveScene().name);
+        string nextLevel;
         if (lastIndex == -1)
-            lastIndex = UnityEngine.Random.Range(-1, 1); // Start with Level1 or Level2
+            nextLevel = levels[0];
+        else
+        {
+            nextLevel = shuffledLevels[++shuffledLevelId];
+        }
 
         if (!Finished)
         {
             Time.timeScale = 1f;
-            SceneManager.LoadScene(levels[(lastIndex + 1) % levels.Length]);
+            SceneManager.LoadScene(nextLevel);
         }
         else
         {
