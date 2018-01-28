@@ -57,7 +57,7 @@ public class Match : MonoBehaviour
     {
         int lastIndex = Array.IndexOf(levels, SceneManager.GetActiveScene().name);
         if (lastIndex == -1)
-            lastIndex = UnityEngine.Random.Range(0, levels.Length);
+            lastIndex = UnityEngine.Random.Range(-1, 1); // Start with Level1 or Level2
 
         if (!Finished)
         {

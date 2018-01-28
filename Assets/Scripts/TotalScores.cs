@@ -18,16 +18,16 @@ public class TotalScores : MonoBehaviour
 
         if (Match.Instance.Finished)
         {
-            switch (Match.Instance.WinnerId)
-            {
-                case -1:
-                    progressLabel.text = "DRAW";
-                    break;
-                default:
-                    progressLabel.text = string.Format("PLAYER {0} WON!", Match.Instance.WinnerId);
-                    break;
-            }
-
+            //switch (Match.Instance.WinnerId)
+            //{
+            //    case -1:
+            //        progressLabel.text = "DRAW";
+            //        break;
+            //    default:
+            //        progressLabel.text = string.Format("PLAYER {0} WON!", Match.Instance.WinnerId);
+            //        break;
+            //}
+            progressLabel.gameObject.SetActive(false);
             restartHintLabel.gameObject.SetActive(true);
         }
         else

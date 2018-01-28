@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class BatRespawner : MonoBehaviour
 {
     public float respawnTime = 3f;
-    public Text timeToRespawnLabel;
+    public Image timeToRespawnImage;
+    public Sprite[] timeToRespawnSprites;
 
     BatController controller;
     BatState state;
@@ -22,7 +23,7 @@ public class BatRespawner : MonoBehaviour
         state = GetComponent<BatState>();
         body = GetComponent<Rigidbody>();
         initialPosition = transform.position;
-        timeToRespawnLabel.enabled = false;
+        timeToRespawnImage.enabled = false;
     }
 
     public void Kill()
@@ -49,19 +50,21 @@ public class BatRespawner : MonoBehaviour
         body.angularVelocity = Vector3.zero;
         body.useGravity = body.detectCollisions = false;
 
-        timeToRespawnLabel.enabled = true;
+        timeToRespawnImage.enabled = true;
         float timeLeft = respawnTime;
-        timeToRespawnLabel.text = Mathf.CeilToInt(timeLeft).ToString();
+        timeToRespawnImage.sprite = timeToRespawnSprites[Mathf.Clamp(Mathf.CeilToInt(timeLeft) - 1,
+            0, timeToRespawnSprites.Length)];
 
         while (timeLeft > 0f)
         {
             float waitTime = timeLeft - Mathf.Floor(timeLeft) + .01f;
             yield return new WaitForSeconds(waitTime);
             timeLeft -= waitTime;
-            timeToRespawnLabel.text = Mathf.CeilToInt(timeLeft).ToString();
+            timeToRespawnImage.sprite = timeToRespawnSprites[Mathf.Clamp(Mathf.CeilToInt(timeLeft) - 1,
+                0, timeToRespawnSprites.Length)];
         }
 
-        timeToRespawnLabel.enabled = false;
+        timeToRespawnImage.enabled = false;
 
         controller.enabled = true;
 
