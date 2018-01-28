@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,10 @@ public class RoundScores : MonoBehaviour
         if (Game.Instance.Winner == 0)
             winnerLabel.text = "ROUND FOR PLAYER 1";
         else if (Game.Instance.Winner == 1)
+        {
             winnerLabel.text = "ROUND FOR PLAYER 2";
+            FlipLabelPositions();
+        }
         else
             winnerLabel.text = "ROUND ENDS WITH A DRAW";
 
@@ -25,5 +29,13 @@ public class RoundScores : MonoBehaviour
             playerScoresLabels[i].text = string.Format("PLAYER {0}: {1}", i + 1,
                 Game.Instance.pointsCollected[i]);
         }
+    }
+
+    private void FlipLabelPositions()
+    {
+        Vector3 temp = playerScoresLabels[0].rectTransform.localPosition;
+        playerScoresLabels[0].rectTransform.localPosition
+            = playerScoresLabels[1].rectTransform.localPosition;
+        playerScoresLabels[1].rectTransform.localPosition = temp;
     }
 }
