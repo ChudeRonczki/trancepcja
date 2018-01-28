@@ -25,9 +25,11 @@ public class BatState : MonoBehaviour
 
 
     float lastDropTimestamp;
+    Rigidbody body;
 
     private void Start()
     {
+        body = GetComponent<Rigidbody>();
         RefreshContainer();
     }
 
@@ -84,7 +86,8 @@ public class BatState : MonoBehaviour
         for (int i = 0; i < carriedTran.Count; ++i)
         {
             carriedTran[i].transform.position = transform.position;
-            carriedTran[i].Drop(new Vector3(dropSpreadImpulse * ((float)i - carriedTran.Count / 2f), 0f));
+            carriedTran[i].Drop(new Vector3(dropSpreadImpulse * ((float)i - carriedTran.Count / 2f)
+                + body.velocity.x, 0f));
         }
 
         carriedTran.Clear();
