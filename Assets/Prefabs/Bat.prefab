@@ -1362,6 +1362,10 @@ MonoBehaviour:
   ignoreTranTrigger: 0
   tranCollectParticles: {fileID: 198217531107602682, guid: d210413c8a2d408439e9b50332f75737,
     type: 2}
+  PickupClip: {fileID: 8300000, guid: 4f7bd8f948f699744a04c300fde5bb83, type: 3}
+  PitchMin: 0.9
+  PitchMax: 1.1
+  DropClip: {fileID: 8300000, guid: 4a10b77ad9dbfba46994835edeb6e2ea, type: 3}
 --- !u!114 &114464896565969454
 MonoBehaviour:
   m_ObjectHideFlags: 1

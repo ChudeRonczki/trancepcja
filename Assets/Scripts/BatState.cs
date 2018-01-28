@@ -24,6 +24,11 @@ public class BatState : MonoBehaviour
     public bool ignoreTranTrigger = false;
     public ParticleSystem tranCollectParticles;
 
+    public AudioClip PickupClip;
+    public float PitchMin = 0.9f;
+    public float PitchMax = 1.1f;
+
+    public AudioClip DropClip;
 
     ParticleSystem tranParticleSystem;
     float lastDropTimestamp;
@@ -74,6 +79,7 @@ public class BatState : MonoBehaviour
             tran.lastOwner = ownerId;
             RefreshContainer();
             if (tranCollectParticles) Instantiate(tranCollectParticles, tran.transform.position, Quaternion.identity);
+            AudioManager.Play(PickupClip, PitchMin, PitchMax);
         }
     }
 
@@ -81,7 +87,10 @@ public class BatState : MonoBehaviour
     {
         if (Input.GetButtonDown("Drop" + (ownerId + 1)))
         {
-            DropTran();
+            if (DropTran())
+            {
+                AudioManager.Play(DropClip, PitchMin, PitchMax);
+            }
         }
         else if (Input.GetButtonUp("Drop" + (ownerId + 1)))
         {
@@ -98,7 +107,7 @@ public class BatState : MonoBehaviour
             ignoreTranTrigger = false;
     }
 
-    internal void DropTran()
+    internal bool DropTran()
     {
         for (int i = 0; i < carriedTran.Count; ++i)
         {
@@ -107,11 +116,15 @@ public class BatState : MonoBehaviour
                 + body.velocity.x, 0f));
         }
 
+        bool anyDropped = carriedTran.Count > 0;
+
         carriedTran.Clear();
         RefreshContainer();
         lastDropTimestamp = Time.timeSinceLevelLoad;
         ignoreTranTrigger = true;
         StartCoroutine(WaitAndStopIgnoringTranTrigger());
+
+        return anyDropped;
     }
 
     public void LoseTran()

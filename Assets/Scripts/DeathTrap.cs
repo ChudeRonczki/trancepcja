@@ -7,6 +7,9 @@ public class DeathTrap : MonoBehaviour
     public bool destroyTran = true;
     public ParticleSystem particlesOnDeath;
     public Vector3 ParticlesOffset = Vector3.zero;
+    public AudioClip DeathClip;
+    public float PitchMin = 0.9f;
+    public float PitchMax = 1f;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +22,7 @@ public class DeathTrap : MonoBehaviour
             }
 
             bat.Kill();
+            AudioManager.Play(DeathClip, PitchMin, PitchMax);
         }
             
 

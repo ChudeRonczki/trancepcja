@@ -110,6 +110,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TranSplooshParticles: {fileID: 198950824169221926, guid: a1f75b4a6893a154bbcbdc7bc997355d,
     type: 2}
+  DropClip: {fileID: 8300000, guid: ce82943c4af2f2d44926742c9dfa28c0, type: 3}
+  PitchMin: 0.9
+  PitchMax: 1.2
 --- !u!114 &114721192316104228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,4 +127,7 @@ MonoBehaviour:
   destroyTran: 0
   particlesOnDeath: {fileID: 198950824169221926, guid: 184c08564066877438179d80093c4fad,
     type: 2}
-  ParticlesOffset: {x: 0, y: -1, z: 0}
+  ParticlesOffset: {x: 0, y: -1, z: -1}
+  DeathClip: {fileID: 8300000, guid: c447aee40ba59214a94bef6d2117dad4, type: 3}
+  PitchMin: 0.9
+  PitchMax: 1.1

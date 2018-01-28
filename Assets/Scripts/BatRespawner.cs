@@ -30,7 +30,7 @@ public class BatRespawner : MonoBehaviour
         state.LoseTran();
         StartCoroutine(Respawn());
 
-        AudioManager.Play(DeathSound, 1.4f, 1.6f);
+        AudioManager.Play(DeathSound, 1.3f, 1.6f);
     }
 
     private IEnumerator Respawn()
