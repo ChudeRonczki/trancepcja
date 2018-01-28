@@ -17,6 +17,8 @@ public class Match : MonoBehaviour
 
     public int mapsPlayed = 0;
 
+    public bool[] inverseDirections = { true, true };
+
     public bool Finished
     {
         get
@@ -59,6 +61,7 @@ public class Match : MonoBehaviour
     {
         var match = Instantiate<Match>(matchPrefab);
         match.mapsToPlay = mapsToPlay;
+        match.inverseDirections = inverseDirections;
         Time.timeScale = 1f;
         SceneManager.LoadScene("Lobby");
         Destroy(gameObject);
