@@ -16,19 +16,27 @@ public class TotalScores : MonoBehaviour
 
         if (Match.Instance.Finished)
         {
-            progressLabel.text = "Final Scores";
+            switch (Match.Instance.WinnerId)
+            {
+                case -1:
+                    progressLabel.text = "DRAW";
+                    break;
+                default:
+                    progressLabel.text = string.Format("PLAYER {0} WON!", Match.Instance.WinnerId);
+                    break;
+            }
             restartHintLabel.gameObject.SetActive(true);
         }
         else
         {
-            progressLabel.text = string.Format("Game {0}/{1}",
+            progressLabel.text = string.Format("GAME {0}/{1}",
                 Match.Instance.mapsPlayed, Match.Instance.mapsToPlay);
             restartHintLabel.gameObject.SetActive(false);
         }
 
         for (int i = 0; i < playerTotalLabels.Length; ++i)
         {
-            playerTotalLabels[i].text = string.Format("Player {0}: {1}", i + 1,
+            playerTotalLabels[i].text = string.Format("PLAYER {0}: {1}", i + 1,
                 Match.Instance.gamesWon[i]);
         }
     }

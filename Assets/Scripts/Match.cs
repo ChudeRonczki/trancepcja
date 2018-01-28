@@ -27,6 +27,21 @@ public class Match : MonoBehaviour
         }
     }
 
+    public int WinnerId
+    {
+        get
+        {
+            if (!Finished)
+                return -1;
+            else if (gamesWon[0] > gamesWon[1])
+                return 0;
+            else if (gamesWon[1] > gamesWon[0])
+                return 1;
+            else
+                return -1;
+        }
+    }
+
     private void Awake()
     {
         Instance = this;
